@@ -1,0 +1,45 @@
+<!--CONTENT-->
+<div class="row">
+  <!--LOG LIST-->
+  <div class="col-md-6">
+    <div>
+      <table class="table table-hover">
+        <tr>
+          <th>Package</th>
+          <th>Version</th>
+          <th>Ticket</th>
+          <th>Date</th>
+          <!--<th class="text-center">Actions</th>-->
+        </tr>
+        <tr *ngFor="let log of logs" (click)="onSelect(log)" [class.active]="log === selectedLog">
+          <td>{{log.packageName}}</td>
+          <td>{{log.versionName}}</td>
+          <td>{{log.ticket}}</td>
+          <td class="date">{{log.createdAt}}</td>
+          <!--<td class="text-center">-->
+          <!--<a href="/logs/{{id}}" class="btn btn-link"><i class="fa fa-search-plus"></i></a>-->
+          <!--<a href="/logs/download/{{id}}" class="btn btn-link"><i class="fa fa-download"></i></a>-->
+          <!--<a href="/logs/delete/{{id}}" class="btn btn-link"-->
+          <!--onclick="return confirm('Are you sure you want to delete?');"><i class="fa fa-times"></i></a>-->
+          <!--</td>-->
+        </tr>
+      </table>
+
+      <!--<ul class="list-group">-->
+      <!--<li *ngFor="let log of logs" class="list-group-item" (click)="onSelect(log)" [class.active]="log === selectedLog">-->
+      <!--<span class="badge">{{log.packageName}}</span> {{log.createdAt}}-->
+      <!--</li>-->
+      <!--</ul>-->
+
+    </div>
+  </div>
+  <!--END LOG LIST-->
+
+  <!--LOG DETAILS-->
+  <div class="col-md-6" *ngIf="selectedLog">
+    <log-detail [log]="selectedLog"></log-detail>
+  </div>
+  <!--END LOG DETAILS-->
+
+</div>
+<!--END CONTENT-->

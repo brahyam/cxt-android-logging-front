@@ -1,0 +1,10 @@
+<div *ngIf="log">
+  <h1>{{log.packageName}}</h1>
+  <h2 *ngIf="log.ticket">{{log.ticket}}</h2>
+  <h2>{{log.versionName}}</h2>
+  <h3>{{log.createdAt}}</h3>
+  <div>
+    <pre>{{log.logCat}}</pre>
+  </div>
+  <button class="btn btn-default" (click)="goBack()">Back</button>
+</div>

@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.logo {
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.inline {
+  display: inline;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
