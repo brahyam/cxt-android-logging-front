@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Log} from '../log';
 import {LogService} from '../log.service';
 
@@ -11,22 +12,34 @@ import {LogService} from '../log.service';
 
 export class LogsComponent implements OnInit {
 
-  constructor(private logService:LogService) {
-  }
+  public data;
+  public filterQuery = "";
+  public rowsOnPage = 10;
+  public sortBy = "email";
+  public sortOrder = "asc";
+  public busy:Promise<any>;
+  public logs:Log[];
+  public selectedLog:Log;
 
-  logs:Log[];
-  selectedLog:Log;
-
-  onSelect(log:Log):void {
-    this.selectedLog = log;
-  }
-
-  getLogs():void {
-    this.logService.getLogs().then(logs => this.logs = logs);
+  constructor(private logService:LogService,
+              private router:Router) {
   }
 
   ngOnInit():void {
     this.getLogs();
   }
+
+  onSelect(log:Log):void {
+    this.selectedLog = log;
+    this.router.navigate(['/detail', this.selectedLog._id]);
+  }
+
+  getLogs():void {
+    this.busy = this.logService.getLogs().then(logs => {
+      this.data = logs;
+      this.logs = logs;
+    });
+  }
+
 }
 

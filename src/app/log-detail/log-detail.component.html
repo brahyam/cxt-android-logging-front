@@ -1,10 +1,38 @@
-<div *ngIf="log">
-  <h1>{{log.packageName}}</h1>
-  <h2 *ngIf="log.ticket">{{log.ticket}}</h2>
-  <h2>{{log.versionName}}</h2>
-  <h3>{{log.createdAt}}</h3>
-  <div>
-    <pre>{{log.logCat}}</pre>
+<div class="row">
+  <div class="col-md-12">
+    <!--ACTIONS-->
+    <button class="btn btn-default" (click)="goBack()">Back</button>
+    <button class="btn btn-default" (click)="onDownload(log)">Download</button>
+    <button class="btn btn-danger" (click)="onDelete(log)">Delete</button>
+    <!--END ACTIONS-->
+    <div *ngIf="log;else NoLog">
+      <h1>{{log.packageName}} Report</h1>
+      <h2 *ngIf="log.ticket">Ticket {{log.ticket}}</h2>
+      <h2> App version:{{log.versionName}}</h2>
+      <h3 class="date">{{log.createdAt | date:'short'}}</h3>
+      <h4><strong>Device Id: </strong>{{log.deviceId}}</h4>
+      <h4><strong>Phone Brand: </strong>{{log.phoneBrand}}</h4>
+      <h4><strong>Phone Model: </strong>{{log.phoneModel}}</h4>
+      <h4><strong>Android Version: </strong>{{log.androidVersion}}</h4>
+      <h4><strong>User IP: </strong>{{log.userIp}}</h4>
+      <div *ngIf="log.stackTrace">
+        <h3><strong>Stack Trace</strong></h3>
+        <div class="well well-sm">
+          {{log.stackTrace}}
+        </div>
+      </div>
+
+      <div *ngIf="log.logCat;else NoLogCat">
+        <h3><strong>LogCat</strong></h3>
+        <pre>{{log.logCat}}</pre>
+      </div>
+
+      <ng-template #NoLogCat>
+        <h3 class="txt-red">No LogCat Attached</h3>
+      </ng-template>
+    </div>
+    <ng-template #NoLog>
+      <h3 class="text-center"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></h3>
+    </ng-template>
   </div>
-  <button class="btn btn-default" (click)="goBack()">Back</button>
 </div>

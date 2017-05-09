@@ -20,12 +20,22 @@ export class LogService {
       .catch(this.handleError);
   }
 
+  getLog(id:string):Promise<Log> {
+    return this.http.get(`${this.apiUrl}/${id}`)
+      .toPromise()
+      .then(response => response.json()[0] as Log)
+      .catch(this.handleError);
+  }
+
+  deleteLog(id:string):Promise<Log> {
+    return this.http.delete(`${this.apiUrl}/${id}`)
+      .toPromise()
+      .then(response => response.json()[0] as Log)
+      .catch(this.handleError);
+  }
+
   private handleError(error:any):Promise<any> {
     console.error('Log Service Error:', error);
     return Promise.reject(error.message || error);
-  }
-
-  getLog(id:string):Promise<Log> {
-    return this.getLogs().then(logs => logs.find(log => log._id === id));
   }
 }

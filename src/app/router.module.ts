@@ -5,7 +5,7 @@ import {LogsComponent}      from './logs/logs.component';
 import {LogDetailComponent}  from './log-detail/log-detail.component';
 
 const routes:Routes = [
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: '', redirectTo: '/logs', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'detail/:id', component: LogDetailComponent},
   {path: 'logs', component: LogsComponent}
