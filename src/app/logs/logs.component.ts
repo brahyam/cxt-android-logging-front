@@ -15,8 +15,8 @@ export class LogsComponent implements OnInit {
   public data;
   public filterQuery = "";
   public rowsOnPage = 10;
-  public sortBy = "email";
-  public sortOrder = "asc";
+  public sortBy = "createdAt";
+  public sortOrder = "desc";
   public busy:Promise<any>;
   public logs:Log[];
   public selectedLog:Log;

@@ -12,13 +12,15 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {AppRoutingModule} from './router.module';
 import {DataTableModule} from "angular2-datatable";
 import {BusyModule} from "angular2-busy";
+import {DataFilterPipe} from "./logs/data-filter.pipe";
 
 @NgModule({
   declarations: [
     LogsComponent,
     LogDetailComponent,
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    DataFilterPipe
   ],
   imports: [
     BrowserModule,

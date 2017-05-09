@@ -3,7 +3,7 @@
   <!--LOG LIST-->
   <div class="col-md-12">
     <div *ngIf="logs;else NoLogs">
-      <table class="table table-hover" [mfData]="data" #mf="mfDataTable">
+      <table class="table table-hover" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable">
         <thead>
         <tr>
           <th>
@@ -19,6 +19,11 @@
             <mfDefaultSorter by="createdAt">Date</mfDefaultSorter>
           </th>
           <!--<th class="text-center">Actions</th>-->
+        </tr>
+        <tr>
+          <th colspan="4">
+            <input class="form-control" [(ngModel)]="filterQuery" placeholder="Filter by Flavor, Ticket or Version">
+          </th>
         </tr>
         </thead>
         <tbody>
