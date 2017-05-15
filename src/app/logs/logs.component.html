@@ -18,7 +18,7 @@
           <th>
             <mfDefaultSorter by="createdAt">Date</mfDefaultSorter>
           </th>
-          <!--<th class="text-center">Actions</th>-->
+          <th class="text-center">Actions</th>
         </tr>
         <tr>
           <th colspan="4">
@@ -27,16 +27,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let log of mf.data" (click)="onSelect(log)" [class.active]="log === selectedLog">
+        <tr *ngFor="let log of mf.data" [class.active]="log === selectedLog">
           <td>{{log.packageName}}</td>
           <td>{{log.versionName}}</td>
           <td>{{log.ticket}}</td>
           <td class="date">{{log.createdAt | date:'short'}}</td>
-          <!--<td class="text-center">-->
-          <!--&lt;!&ndash;<a href="/logs/{{id}}" class="btn btn-link"><i class="fa fa-search-plus"></i></a>&ndash;&gt;-->
-          <!--<button (click)="onDownload(log)" class="btn btn-link"><i class="fa fa-download"></i></button>-->
-          <!--<button (click)="onDelete(log)" class="btn btn-link" onclick="return confirm('Are you sure you want to delete?');"><i class="fa fa-times"></i></button>-->
-          <!--</td>-->
+          <td class="text-center">
+            <button (click)="onSelect(log)" class="btn btn-link"><i class="fa fa-external-link"></i></button>
+            <button (click)="onDownload(log)" class="btn btn-link"><i class="fa fa-download"></i></button>
+            <button (click)="onDelete(log)" class="btn btn-link"><i class="fa fa-times"></i></button>
+          </td>
         </tr>
         </tbody>
 
