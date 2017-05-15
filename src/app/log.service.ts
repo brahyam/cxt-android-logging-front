@@ -9,12 +9,13 @@ import {environment} from '../environments/environment';
 export class LogService {
 
   private apiUrl = environment.apiBaseUrl + 'api/logs';
+  private maxLogs = 60;
 
   constructor(private http:Http) {
   }
 
   getLogs():Promise<Log[]> {
-    return this.http.get(this.apiUrl)
+    return this.http.get(`${this.apiUrl}?perPage=${this.maxLogs}`)
       .toPromise()
       .then(response => response.json().data as Log[])
       .catch(this.handleError);

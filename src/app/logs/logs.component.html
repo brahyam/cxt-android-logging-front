@@ -3,7 +3,8 @@
   <!--LOG LIST-->
   <div class="col-md-12">
     <div *ngIf="logs;else NoLogs">
-      <table class="table table-hover" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable">
+      <table class="table table-hover" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
+             [mfRowsOnPage]="rowsOnPage">
         <thead>
         <tr>
           <th>
@@ -39,7 +40,13 @@
           </td>
         </tr>
         </tbody>
-
+        <tfoot>
+        <tr>
+          <td colspan="5">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </div>
     <ng-template #NoLogs>
