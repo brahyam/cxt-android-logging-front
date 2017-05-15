@@ -16,14 +16,14 @@ export class LogService {
   getLogs():Promise<Log[]> {
     return this.http.get(this.apiUrl)
       .toPromise()
-      .then(response => response.json() as Log[])
+      .then(response => response.json().data as Log[])
       .catch(this.handleError);
   }
 
   getLog(id:string):Promise<Log> {
     return this.http.get(`${this.apiUrl}/${id}`)
       .toPromise()
-      .then(response => response.json()[0] as Log)
+      .then(response => response.json().data[0] as Log)
       .catch(this.handleError);
   }
 
