@@ -11,9 +11,9 @@ export class DataFilterPipe implements PipeTransform {
       // return _.filter(array, row => row.packageName.indexOf(query) > -1);
       return _.filter(array, row => {
 
-        return (row.packageName && row.packageName.indexOf(query) > -1 )
-          || (row.versionName && row.versionName.indexOf(query) > -1 )
-          || (row.ticket && row.ticket.indexOf(query) > -1);
+        return (row.packageName && row.packageName.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+          || (row.versionName && row.versionName.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+          || (row.ticket && row.ticket.toLowerCase().indexOf(query.toLowerCase()) > -1);
       });
     }
     return array;

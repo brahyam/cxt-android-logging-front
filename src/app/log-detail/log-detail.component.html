@@ -17,9 +17,9 @@
       <h4><strong>User IP: </strong>{{log.userIp}}</h4>
       <div *ngIf="log.stackTrace">
         <h3><strong>Stack Trace</strong></h3>
-        <div class="well well-sm">
+        <pre>
           {{log.stackTrace}}
-        </div>
+        </pre>
       </div>
 
       <div *ngIf="log.logCat;else NoLogCat">
