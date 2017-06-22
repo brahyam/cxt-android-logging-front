@@ -9,7 +9,7 @@ import {environment} from '../environments/environment';
 export class LogService {
 
   private apiUrl = environment.apiBaseUrl + 'api/logs';
-  private maxLogs = 60;
+  private maxLogs = environment.maxLogs;
 
   constructor(private http:Http) {
   }

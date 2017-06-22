@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://cxt-android-logging-backend-st.herokuapp.com/'
+  apiBaseUrl: 'https://cxt-android-logging-backend-st.herokuapp.com/',
+  maxLogs: 10
 };
