@@ -9,33 +9,32 @@ import {environment} from '../environments/environment';
 export class LogService {
 
   private apiUrl = environment.apiBaseUrl + 'api/logs';
-  private maxLogs = environment.maxLogs;
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
   }
 
-  getLogs():Promise<Log[]> {
-    return this.http.get(`${this.apiUrl}?perPage=${this.maxLogs}`)
+  getLogs(page: number, limit: number): Promise<Log[]> {
+    return this.http.get(`${this.apiUrl}?page=${page}&perPage=${limit}&slim=true`)
       .toPromise()
       .then(response => response.json().data as Log[])
       .catch(this.handleError);
   }
 
-  getLog(id:string):Promise<Log> {
+  getLog(id: string): Promise<Log> {
     return this.http.get(`${this.apiUrl}/${id}`)
       .toPromise()
       .then(response => response.json().data[0] as Log)
       .catch(this.handleError);
   }
 
-  deleteLog(id:string):Promise<Log> {
+  deleteLog(id: string): Promise<Log> {
     return this.http.delete(`${this.apiUrl}/${id}`)
       .toPromise()
       .then(response => response.json()[0] as Log)
       .catch(this.handleError);
   }
 
-  private handleError(error:any):Promise<any> {
+  private handleError(error: any): Promise<any> {
     console.error('Log Service Error:', error);
     return Promise.reject(error.message || error);
   }

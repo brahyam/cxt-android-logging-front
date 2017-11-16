@@ -1,7 +1,9 @@
+///<reference path="../log.ts"/>
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Log} from '../log';
 import {LogService} from '../log.service';
+import {environment} from '../../environments/environment';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -13,50 +15,57 @@ import * as FileSaver from 'file-saver';
 
 export class LogsComponent implements OnInit {
 
-  public data;
-  public filterQuery = "";
+  public data: Log[];
+  public filterQuery = '';
   public rowsOnPage = 10;
-  public sortBy = "createdAt";
-  public sortOrder = "desc";
-  public busy:Promise<any>;
-  public logs:Log[];
-  public selectedLog:Log;
+  public sortBy = 'createdAt';
+  public sortOrder = 'desc';
+  public busy: Promise<any>;
+  public logs: Log[];
+  public selectedLog: Log;
+  public currentServerPage = 0;
+  public loadedLogs = environment.maxLogs;
+  public loading = false;
 
-  constructor(private logService:LogService,
-              private router:Router) {
+  constructor(private logService: LogService,
+              private router: Router) {
   }
 
-  ngOnInit():void {
-    this.getLogs();
+  ngOnInit(): void {
+    this.getLogs(0, this.loadedLogs);
   }
 
-  onSelect(log:Log):void {
+  onSelect(log: Log): void {
     this.selectedLog = log;
     // this.router.navigate(['/detail', this.selectedLog._id]);
     // Navigate to log in new tab
     window.open('/detail/' + log._id, '_blank');
   }
 
-  onDownload(log:Log):void {
-    var now = new Date();
-    var blob = new Blob([log.logCat], {type: "text/plain;charset=utf-8"});
-    FileSaver.saveAs(blob, "LogCat-" + log.packageName + now.getTime() + ".txt");
+  onDownload(log: Log): void {
+    const now = new Date();
+    const blob = new Blob([log.logCat], {type: 'text/plain;charset=utf-8'});
+    FileSaver.saveAs(blob, 'LogCat-' + log.packageName + now.getTime() + '.txt');
   }
 
-  onDelete(log:Log):void {
+  onDelete(log: Log): void {
     if (confirm('Are you sure you want to delete?')) {
       this.logService.deleteLog(log._id).then(log => {
-        this.getLogs();
-      })
+        this.getLogs(this.currentServerPage, this.loadedLogs);
+      });
     }
   }
 
-  getLogs():void {
-    this.busy = this.logService.getLogs().then(logs => {
-      this.data = logs;
-      this.logs = logs;
-    });
+  getLogs(page: number, limit: number): void {
+    if (page >= 0) {
+      this.loading = true;
+      this.currentServerPage = page;
+      this.busy = this.logService.getLogs(page, limit).then(logs => {
+        this.data = logs;
+        this.logs = logs;
+        this.loading = false;
+      });
+    }
   }
-
 }
 

@@ -9,14 +9,14 @@ import {LogService} from '../log.service';
 })
 export class DashboardComponent implements OnInit {
 
-  logs:Log[] = [];
+  logs: Log[] = [];
 
 
-  constructor(private logService:LogService) {
+  constructor(private logService: LogService) {
   }
 
-  ngOnInit():void {
-    this.logService.getLogs().then(logs => this.logs = logs);
+  ngOnInit(): void {
+    this.logService.getLogs(0, 100).then(logs => this.logs = logs);
   }
 
 }

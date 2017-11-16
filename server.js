@@ -36,4 +36,4 @@ app.get('/*', function (req, res) {
 // Start the app by listening on the default
 // Heroku port
 app.listen(process.env.PORT || 3030);
-console.log('server running');
+console.log('server running in port 3030 or custom port from env');

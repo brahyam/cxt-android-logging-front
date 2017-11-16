@@ -3,6 +3,23 @@
   <!--LOG LIST-->
   <div class="col-md-12">
     <div *ngIf="logs;else NoLogs">
+      <button (click)="getLogs(currentServerPage-1, loadedLogs)" class="inline btn btn-link"><i class="fa fa-angle-left"></i>
+      </button>
+      <h4 class="inline">Loaded {{((currentServerPage)*loadedLogs)| number:0}} -
+        {{((currentServerPage+1)*loadedLogs)|number:0}} Logs</h4>
+      <button (click)="getLogs(currentServerPage+1, loadedLogs)" class="btn btn-link inline"><i class="fa fa-angle-right"></i></button>
+      <div class="inline" *ngIf="loading == true">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i><strong>Please Wait</strong>
+      </div>
+      <div class="inline pull-right">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="loadedLogs">Fetching</label>
+            <input type="text" class="form-control" id="loadedLogs" [(ngModel)]="loadedLogs" size="4" maxlength="4" >
+          </div>
+          <button (click)="getLogs(currentServerPage,loadedLogs)" class="btn btn-default">Refresh</button>
+        </div>
+      </div>
       <table class="table table-hover" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
              [mfRowsOnPage]="rowsOnPage">
         <thead>
@@ -14,7 +31,10 @@
             <mfDefaultSorter by="versionName">Version</mfDefaultSorter>
           </th>
           <th>
-            <mfDefaultSorter by="ticket">Ticket</mfDefaultSorter>
+            <mfDefaultSorter by="phoneBrand">Phone Brand</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="phoneModel">Phone Model</mfDefaultSorter>
           </th>
           <th>
             <mfDefaultSorter by="createdAt">Date</mfDefaultSorter>
@@ -22,8 +42,9 @@
           <th class="text-center">Actions</th>
         </tr>
         <tr>
-          <th colspan="5">
-            <input class="form-control" [(ngModel)]="filterQuery" placeholder="Filter by Flavor, Ticket or Version">
+          <th colspan="6">
+            <input class="form-control" [(ngModel)]="filterQuery"
+                   placeholder="Filter by Flavor, Ticket, Brand, Model or Version">
           </th>
         </tr>
         </thead>
@@ -31,7 +52,8 @@
         <tr *ngFor="let log of mf.data" [class.active]="log === selectedLog">
           <td>{{log.packageName}}</td>
           <td>{{log.versionName}}</td>
-          <td>{{log.ticket}}</td>
+          <td>{{log.phoneBrand}}</td>
+          <td>{{log.phoneModel}}</td>
           <td class="date">{{log.createdAt | date:'short'}}</td>
           <td class="text-center">
             <button (click)="onSelect(log)" class="btn btn-link"><i class="fa fa-external-link"></i></button>
@@ -43,14 +65,14 @@
         <tfoot>
         <tr>
           <td colspan="5">
-            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25,50,100,1000]"></mfBootstrapPaginator>
           </td>
         </tr>
         </tfoot>
       </table>
     </div>
     <ng-template #NoLogs>
-      <h3 class="text-center"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></h3>
+      <h3 class="text-center">No logs available yet ...<i class="fa fa-circle-o-notch fa-spin fa-fw"></i></h3>
     </ng-template>
   </div>
 </div>
