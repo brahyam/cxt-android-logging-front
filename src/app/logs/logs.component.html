@@ -39,10 +39,11 @@
           <th>
             <mfDefaultSorter by="createdAt">Date</mfDefaultSorter>
           </th>
+          <th class="text-center"></th>
           <th class="text-center">Actions</th>
         </tr>
         <tr>
-          <th colspan="6">
+          <th colspan="7">
             <input class="form-control" [(ngModel)]="filterQuery"
                    placeholder="Filter by Flavor, Ticket, Brand, Model or Version">
           </th>
@@ -55,6 +56,8 @@
           <td>{{log.phoneBrand}}</td>
           <td>{{log.phoneModel}}</td>
           <td class="date">{{log.createdAt | date:'short'}}</td>
+          <td><i *ngIf="log.screenshotUrl" class="fa fa-picture-o" data-toggle="tooltip" data-placement="left"
+                 title="Screenshot available"></i></td>
           <td class="text-center">
             <button (click)="onSelect(log)" class="btn btn-link"><i class="fa fa-external-link"></i></button>
             <button (click)="onDownload(log)" class="btn btn-link"><i class="fa fa-download"></i></button>

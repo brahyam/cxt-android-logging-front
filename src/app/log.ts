@@ -1,6 +1,7 @@
 export class Log {
   _id: string;
   ticket: string;
+  screenshotUrl: string;
   uploader: string;
   androidVersion: string;
   versionCode: string;
