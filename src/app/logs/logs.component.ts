@@ -50,7 +50,7 @@ export class LogsComponent implements OnInit {
 
   onDelete(log: Log): void {
     if (confirm('Are you sure you want to delete?')) {
-      this.logService.deleteLog(log._id).then(log => {
+      this.logService.deleteLog(log._id).then(() => {
         this.getLogs(this.currentServerPage, this.loadedLogs);
       });
     }
@@ -64,6 +64,14 @@ export class LogsComponent implements OnInit {
         this.data = logs;
         this.logs = logs;
         this.loading = false;
+      });
+    }
+  }
+
+  deleteOldLogs() {
+    if (confirm('Are you sure you want to delete?')) {
+      this.logService.deleteOldLogs().then(() => {
+        this.getLogs(this.currentServerPage, this.loadedLogs);
       });
     }
   }

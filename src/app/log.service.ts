@@ -38,4 +38,11 @@ export class LogService {
     console.error('Log Service Error:', error);
     return Promise.reject(error.message || error);
   }
+
+  deleteOldLogs() {
+    return this.http.get(`${this.apiUrl}/deleteold`)
+      .toPromise()
+      .then()
+      .catch(this.handleError);
+  }
 }

@@ -13,6 +13,7 @@ export class DataFilterPipe implements PipeTransform {
 
         return (row.packageName && row.packageName.toLowerCase().indexOf(query.toLowerCase()) > -1 )
           || (row.versionName && row.versionName.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+          || (row.versionCode && row.versionCode.toLowerCase().indexOf(query.toLowerCase()) > -1)
           || (row.ticket && row.ticket.toLowerCase().indexOf(query.toLowerCase()) > -1)
           || (row.phoneModel && row.phoneModel.toLowerCase().indexOf(query.toLowerCase()) > -1)
           || (row.phoneBrand && row.phoneBrand.toLowerCase().indexOf(query.toLowerCase()) > -1);

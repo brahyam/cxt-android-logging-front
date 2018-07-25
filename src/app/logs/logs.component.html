@@ -18,6 +18,7 @@
             <input type="text" class="form-control" id="loadedLogs" [(ngModel)]="loadedLogs" size="4" maxlength="4" >
           </div>
           <button (click)="getLogs(currentServerPage,loadedLogs)" class="btn btn-default">Refresh</button>
+          <button (click)="deleteOldLogs()" class="btn btn-danger">Delete Old Logs</button>
         </div>
       </div>
       <table class="table table-hover" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable"
@@ -52,7 +53,7 @@
         <tbody>
         <tr *ngFor="let log of mf.data" [class.active]="log === selectedLog">
           <td>{{log.packageName}}</td>
-          <td>{{log.versionName}}</td>
+          <td>{{log.versionName}} ({{log.versionCode}})</td>
           <td>{{log.phoneBrand}}</td>
           <td>{{log.phoneModel}}</td>
           <td class="date">{{log.createdAt | date:'short'}}</td>
